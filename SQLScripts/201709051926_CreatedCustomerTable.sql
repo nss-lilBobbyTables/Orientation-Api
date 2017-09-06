@@ -1,7 +1,9 @@
 USE [Bangazon]
 GO
 
+
 /****** Object:  Table [dbo].[Customers]    Script Date: 9/5/2017 5:25:32 PM ******/
+
 SET ANSI_NULLS ON
 GO
 
@@ -12,8 +14,8 @@ CREATE TABLE [dbo].[Customers](
 	[Customer_ID] [int] IDENTITY(1,1) NOT NULL,
 	[FirstName] [varchar](50) NOT NULL,
 	[LastName] [varchar](50) NOT NULL,
-	[Address] [varchar](500) NOT NULL,
-	[IsActive] [bit] NULL,
+	[Address] [varchar](100) NOT NULL,
+	[IsActive] [bit] NOT NULL,
  CONSTRAINT [PK_Customers] PRIMARY KEY CLUSTERED 
 (
 	[Customer_ID] ASC
