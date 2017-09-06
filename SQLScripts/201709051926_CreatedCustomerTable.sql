@@ -1,7 +1,9 @@
 USE [Bangazon]
 GO
 
-/****** Object:  Table [dbo].[Customers]    Script Date: 9/5/2017 5:16:27 PM ******/
+
+/****** Object:  Table [dbo].[Customers]    Script Date: 9/5/2017 5:25:32 PM ******/
+
 SET ANSI_NULLS ON
 GO
 
