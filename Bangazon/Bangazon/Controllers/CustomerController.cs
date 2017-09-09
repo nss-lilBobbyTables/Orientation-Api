@@ -50,5 +50,24 @@ namespace Bangazon.Controllers
                 }
             }
         }
+        // PUT api/customers/5
+        [HttpPut, Route("update/{id}")]
+        public HttpResponseMessage Put(int id, Models.CustomerItem customer)
+        {
+            using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Bangazon"].ConnectionString))
+            {
+                try
+                {
+                    var customerData = new CustomerDataAccess();
+                    var results = customerData.Update(id, customer);
+                    return Request.CreateResponse(HttpStatusCode.Created, $"rows affected, {results}");
+
+                }
+                catch (Exception ex)
+                {
+                    return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
+                }
+            }
+        }
     }
 }
