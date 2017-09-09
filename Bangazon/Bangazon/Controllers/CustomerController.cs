@@ -7,6 +7,8 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 using Dapper;
+using System.Data.SqlClient;
+using System.Configuration;
 
 namespace Bangazon.Controllers
 {
@@ -27,6 +29,25 @@ namespace Bangazon.Controllers
             catch (Exception)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Query blew up");
+            }
+        }
+        // POST api/employees/
+        [HttpPost, Route("")]
+        public HttpResponseMessage Post(Models.CustomerItem customer)
+        {
+            using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Bangazon"].ConnectionString))
+            {
+                try
+                {
+                    var customerData = new CustomerDataAccess();
+                    var results = customerData.Post(customer);
+                    return Request.CreateResponse(HttpStatusCode.Created, $"rows affected, {results}");
+
+                }
+                catch (Exception ex)
+                {
+                    return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
+                }
             }
         }
     }

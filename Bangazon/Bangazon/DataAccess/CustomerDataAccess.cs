@@ -22,5 +22,16 @@ namespace Bangazon.DataAccess
                 return result.ToList();
             }
         }
+        public int Post(CustomerItem customer)
+        {
+            using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Bangazon"].ConnectionString))
+            {
+
+                var results = connection.Execute("Insert into Customers(FirstName, LastName, Address, isActive) " +
+                                                "Values(@FirstName, @LastName, @Address, @isActive)",
+                new { FirstName = customer.FirstName, LastName = customer.LastName, Address = customer.Address, isActive = customer.isActive });
+                return results;
+            }
+        }
     }
 }
