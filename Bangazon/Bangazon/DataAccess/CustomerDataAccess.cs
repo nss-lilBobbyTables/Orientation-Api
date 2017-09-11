@@ -35,5 +35,29 @@ namespace Bangazon.DataAccess
                 return results;
             }
         }
+
+        public int Update(int id, CustomerItem customer)
+        {
+            using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Bangazon"].ConnectionString))
+            {
+                connection.Open();
+
+                var results = connection.Execute
+                                       ("Update Customers " + 
+                                       "SET FirstName = @FirstName, " +
+                                       "LastName = @LastName, " +
+                                       "Address = @Address "  + 
+                                       "WHERE Customer_Id = @CustomerID " , 
+                                       new
+                                       {
+                                           CustomerID = id,
+                                           FirstName = customer.FirstName,
+                                           LastName = customer.LastName,
+                                           Address = customer.Address
+                                       });
+                return results;
+            }
+
+        }
     }
 }
