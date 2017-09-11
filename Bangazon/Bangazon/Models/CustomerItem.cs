@@ -5,7 +5,12 @@ using System.Web;
 
 namespace Bangazon.Models
 {
-    public class Class1
+    public class CustomerItem
     {
+        public int CustomereId { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Address { get; set; }
+        public int isActive { get; set; }
     }
 }
