@@ -1,21 +1,39 @@
 ﻿using Bangazon.DataAccess;
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Net;
 using System.Net.Http;
 using System.Web;
-using System.Web.Http;
 using Dapper;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Web.Http;
+using Bangazon.Models;
+using Bangazon.DataAccess;
 
 namespace Bangazon.Controllers
 {
     [RoutePrefix("api/customer")]
     public class CustomerController : ApiController
     {
-        //api/customer
+
+        //api/Customer
+        public HttpResponseMessage Post(CustomerListResult customer)
+        {
+            using (var connection =
+                    new SqlConnection(ConfigurationManager.ConnectionStrings["Bangazon"].ConnectionString))
+                try
+                {
+                    var addCustomerData = new CustomerDataAccess();
+                    addCustomerData.Add(customer);
+
+                    return Request.CreateResponse(HttpStatusCode.OK);
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Query blew up");
+            }
+        }
+        
         [HttpGet, Route("")] //-> route prefix, adds the prefix to the route attributes going forward
         public HttpResponseMessage GetAll()
         {
@@ -31,6 +49,7 @@ namespace Bangazon.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Query blew up");
             }
         }
+        
         // POST api/employees/
         [HttpPost, Route("")]
         public HttpResponseMessage Post(Models.CustomerItem customer)
@@ -49,7 +68,7 @@ namespace Bangazon.Controllers
                     return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
                 }
             }
-        }
+                }
         // PUT api/customers/5
         [HttpPut, Route("update/{id}")]
         public HttpResponseMessage Put(int id, Models.CustomerItem customer)
@@ -69,5 +88,9 @@ namespace Bangazon.Controllers
                 }
             }
         }
+        }
     }
 }
+
+
+
