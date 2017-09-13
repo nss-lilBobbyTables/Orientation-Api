@@ -69,5 +69,42 @@ namespace Bangazon.Controllers
                 }
             }
         }
+
+        // PUT IsActive Status Change
+        [HttpPut, Route("changestatus/{id}")]
+        public HttpResponseMessage ChangeStatus(int id)
+        {
+            using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Bangazon"].ConnectionString))
+            {
+                try
+                {
+                    var customerData = new CustomerDataAccess();
+                    var results = customerData.UpdateStatus(id);
+                    return Request.CreateResponse(HttpStatusCode.Created, $"rows affected, {results}");
+
+                }
+                catch (Exception ex)
+                {
+                    return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
+                }
+            }
+        }
+
+        //api/customer
+        [HttpGet, Route("{id}")] //-> route prefix, adds the prefix to the route attributes going forward
+        public HttpResponseMessage GetById(int id)
+        {
+            try
+            {
+                var customerData = new CustomerDataAccess();
+                var customers = customerData.GetSingle(id);
+
+                return Request.CreateResponse(HttpStatusCode.OK, customers);
+            }
+            catch (Exception)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Query blew up");
+            }
+        }
     }
 }

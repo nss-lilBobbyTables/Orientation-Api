@@ -57,5 +57,52 @@ namespace Bangazon.DataAccess
             }
 
         }
+
+        public int UpdateStatus(int id)
+        {
+            using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Bangazon"].ConnectionString))
+            {
+
+                var SelectedCustomer = GetSingle(id).isActive;
+                connection.Open();
+
+                //customerInfoResults.ToList();
+
+                var ActiveStatus = false;
+
+                if (SelectedCustomer == false) {
+                    ActiveStatus = true;
+                } 
+                
+
+                var results = connection.Execute
+                                       ("Update Customers " +
+                                       "SET IsActive = @newActiveStatus " +
+                                       "WHERE Customer_Id = @CustomerID ",
+                                       new
+                                       {
+                                           CustomerID = id,
+                                           newActiveStatus = ActiveStatus
+                                       });
+                return results;
+            }
+        }
+
+        public CustomerItem GetSingle(int id)
+        {
+            using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Bangazon"].ConnectionString))
+            {
+                connection.Open();
+
+                var result = connection.QueryFirstOrDefault<CustomerItem>("SELECT * " +
+                                                                            "FROM Customers " +
+                                                                            "WHERE Customer_Id = @CustomerID ",
+                                                                            new { CustomerID = id });
+                return result;
+                    
+                                                                                
+            }
+
+        }
     }
 }
