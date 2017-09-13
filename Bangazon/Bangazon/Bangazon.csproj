@@ -181,15 +181,20 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="DataAccess\CustomerDataAccess.cs" />
+    <Compile Include="DataAccess\IRepository.cs" />
     <Compile Include="DataAccess\ProductDataAccess.cs" />
+    <Compile Include="DataAccess\OrderDataAccess.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CustomerItem.cs" />
+    <Compile Include="Models\CustomerListResults.cs" />
     <Compile Include="Models\ProductItem.cs" />
+    <Compile Include="Models\OrderListResults.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

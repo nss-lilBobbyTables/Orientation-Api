@@ -1,4 +1,4 @@
-﻿using Bangazon.DataAccess;
+using Bangazon.DataAccess;
 using System;
 using System.Collections.Generic;
 using System.Linq;
