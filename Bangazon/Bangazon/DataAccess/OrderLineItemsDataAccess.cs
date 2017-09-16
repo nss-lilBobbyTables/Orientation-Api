@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 
 namespace Bangazon.DataAccess
 {
-    public class OrderLineItemsDataAccess : IRepository<OrderLineItemsListResults>
+    public class OrderLineItemsDataAccess
     {
         public void Add(OrderLineItemsListResults orderItem)
         {

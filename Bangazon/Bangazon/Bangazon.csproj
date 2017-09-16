@@ -186,6 +186,7 @@
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="DataAccess\CustomerDataAccess.cs" />
+    <Compile Include="DataAccess\OrderLineItemsDataAccess.cs" />
     <Compile Include="DataAccess\ProductDataAccess.cs" />
     <Compile Include="DataAccess\OrderDataAccess.cs" />
     <Compile Include="Global.asax.cs">

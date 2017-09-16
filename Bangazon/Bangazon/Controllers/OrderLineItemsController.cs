@@ -10,9 +10,11 @@ using System.Collections.Generic;
 
 namespace Bangazon.Controllers
 {
+    [RoutePrefix("api/orderlineitems")]
     public class OrderLineItemsController : ApiController
     {
         //api/OrderLineItems
+        [HttpPost, Route("")]
         public HttpResponseMessage Post(List<OrderLineItemsListResults> orderItems)
         {
             using (var connection =
