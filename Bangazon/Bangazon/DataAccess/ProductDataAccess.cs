@@ -39,11 +39,61 @@ namespace Bangazon.DataAccess
             using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Bangazon"].ConnectionString))
             {
                 connection.Open();
-                var results = connection.Execute("Update Products " + 
+                var results = connection.Execute("Update Products " +
                                        "SET Quantity = 0 " +
                                        "WHERE ProductID = @productID ", new { productID = id });
                 return results;
             }
+        }
+
+        public int UpdateInventory(int id, int CartAmount)
+        {
+            using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Bangazon"].ConnectionString))
+            {
+
+                var SelectedProductCount = GetSingle(id).Quantity;
+                connection.Open();
+
+                if (CartAmount > SelectedProductCount)
+                {
+                    return 0;
+                }
+
+                else
+                {
+
+                    var newQuantity = SelectedProductCount - CartAmount;
+
+                    var results = connection.Execute
+                                           ("Update Products " +
+                                           "SET Quantity = @Quantity " +
+                                           "WHERE ProductID = @ProductID ",
+                                           new
+                                           {
+                                               ProductID = id,
+                                               Quantity = newQuantity
+                                           });
+                    return results;
+                }
+
+            }
+        }
+
+        public ProductItem GetSingle(int id)
+        {
+            using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Bangazon"].ConnectionString))
+            {
+                connection.Open();
+
+                var result = connection.QueryFirstOrDefault<ProductItem>("SELECT * " +
+                                                                            "FROM Products " +
+                                                                            "WHERE ProductID = @productID ",
+                                                                            new { productID = id });
+                return result;
+
+
+            }
+
         }
     }
 }
