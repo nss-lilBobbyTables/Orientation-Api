@@ -182,10 +182,12 @@
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Controllers\OrderLineItemsController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="DataAccess\CustomerDataAccess.cs" />
     <Compile Include="DataAccess\IRepository.cs" />
+    <Compile Include="DataAccess\OrderLineItemsDataAccess.cs" />
     <Compile Include="DataAccess\ProductDataAccess.cs" />
     <Compile Include="DataAccess\OrderDataAccess.cs" />
     <Compile Include="Global.asax.cs">
@@ -193,6 +195,7 @@
     </Compile>
     <Compile Include="Models\CustomerItem.cs" />
     <Compile Include="Models\CustomerListResults.cs" />
+    <Compile Include="Models\OrderLineItemsListResults.cs" />
     <Compile Include="Models\ProductItem.cs" />
     <Compile Include="Models\OrderListResults.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
