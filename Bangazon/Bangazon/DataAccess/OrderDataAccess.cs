@@ -46,6 +46,20 @@ namespace Bangazon.DataAccess
             }
         }
 
+        public int SetAsPaid(int id)
+        {
+            using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Bangazon"].ConnectionString))
+            {
+                connection.Open();
+                var result = connection.Execute("Update [Order]" +
+                                                "Set PaymentDue = 0" +
+                                                "Where OrderID = @orderID",
+                                               new { orderID = id } );
+                    return result;
+
+            }
+        }
+
      
     }
 }
