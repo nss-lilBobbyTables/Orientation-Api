@@ -68,5 +68,34 @@ namespace Bangazon.Controllers
                 }
             }
         }
+
+        //Customers can not order out of stock items
+        //api/products/{id}
+        [HttpPut, Route("{id}/{cartAmount}")] //-> route prefix, adds the prefix to the route attributes going forward
+        public HttpResponseMessage InventoryCheck(int id, int cartAmount)
+        {
+            try
+            {
+                var productData = new ProductDataAccess();
+                var results = productData.UpdateInventory(id, cartAmount);
+
+                if (results == 0)
+                {
+
+                    return Request.CreateErrorResponse(HttpStatusCode.RequestEntityTooLarge, "Not Enough Stock to Complete Order!");
+
+                }
+
+                else
+                {
+
+                    return Request.CreateResponse(HttpStatusCode.OK, results);
+                }
+            }
+            catch (Exception)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Query blew up");
+            }
+        }
     }
 }
