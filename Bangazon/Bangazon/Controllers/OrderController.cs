@@ -56,6 +56,22 @@ namespace Bangazon.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "This is why we can't have nice things", ex);
             }
         }
+
+        //api/order/paid
+        [HttpPut, Route("paid/{id}")]
+        public HttpResponseMessage SetAsPaid(int id)
+        {
+            try
+            {
+                var orderData = new OrderDataAccess();
+                var results = orderData.SetAsPaid(id);
+                return Request.CreateResponse(HttpStatusCode.Accepted, "Paid!");
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "OOPS you", ex);
+            }
+        }
     }
 }
 

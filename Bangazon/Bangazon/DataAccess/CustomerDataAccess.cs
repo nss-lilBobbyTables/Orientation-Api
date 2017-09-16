@@ -7,7 +7,6 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Web;
-using Dapper;
 
 namespace Bangazon.DataAccess
 {

@@ -7,5 +7,6 @@
         public int Product_ID { get; set; }
         public int Payment_ID { get; set; }
         public bool IsActive { get; set; }
+        public int PaymentDue { get; set; }
     }
 }
