@@ -10,7 +10,7 @@ using System.Web;
 
 namespace Bangazon.DataAccess
 {
-    public class OrderDataAccess : IRepository<OrderListResult>
+    public class OrderDataAccess 
     {
         public void Add(OrderListResult order)
         {
@@ -24,6 +24,29 @@ namespace Bangazon.DataAccess
                                                         new { Customer_ID = order.Customer_ID, Product_ID = order.Product_ID, Payment_ID = order.Payment_ID, IsActive = order.IsActive });
             }
         }
+
+        public List<OrderListResult> Get()
+        {
+            using (var connection =
+               new SqlConnection(ConfigurationManager.ConnectionStrings["Bangazon"].ConnectionString))
+            {
+                connection.Open();
+
+                var result = @"SELECT Order_ID,
+                                Customer_ID,
+                                Product_ID,
+                                Payment_ID,
+                                IsActive
+                                FROM [dbo].[Order]
+                                WHERE IsActive = 'true'";
+
+                {
+                    return connection.Query<OrderListResult>(result).ToList();
+                }
+            }
+        }
+
+     
     }
 }
 
