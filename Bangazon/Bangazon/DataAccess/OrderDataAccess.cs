@@ -1,18 +1,13 @@
 ﻿using Bangazon.Models;
 using Dapper;
-using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Net;
-using System.Web;
 
 namespace Bangazon.DataAccess
 {
-    public class OrderDataAccess : IRepository<OrderListResult>
+    public class OrderDataAccess : IRepository<OrderLineItemsListResult>
     {
-        public void Add(OrderListResult order)
+        public void Add(OrderLineItemsListResult order)
         {
             using (var connection =
                 new SqlConnection(ConfigurationManager.ConnectionStrings["Bangazon"].ConnectionString))

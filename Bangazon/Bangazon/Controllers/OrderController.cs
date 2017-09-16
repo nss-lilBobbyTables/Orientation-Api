@@ -15,7 +15,7 @@ namespace Bangazon.Controllers
     public class OrderController : ApiController
     {
         //api/Order
-        public HttpResponseMessage Post(OrderListResult order)
+        public HttpResponseMessage Post(OrderLineItemsListResult order)
         {
             using (var connection =
                     new SqlConnection(ConfigurationManager.ConnectionStrings["Bangazon"].ConnectionString))
