@@ -16,8 +16,12 @@ namespace Bangazon.Controllers
     public class OrderController : ApiController
     {
         //api/Order
+<<<<<<< HEAD
+        public HttpResponseMessage Post(OrderLineItemsListResult order)
+=======
         [HttpPost, Route("")]
         public HttpResponseMessage Post(OrderListResult order)
+>>>>>>> sprint2
         {
             using (var connection =
                     new SqlConnection(ConfigurationManager.ConnectionStrings["Bangazon"].ConnectionString))
