@@ -1,18 +1,17 @@
 ﻿using Bangazon.Models;
 using Dapper;
-using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Net;
-using System.Web;
 
 namespace Bangazon.DataAccess
 {
+<<<<<<< HEAD
+    public class OrderDataAccess : IRepository<OrderLineItemsListResult>
+=======
     public class OrderDataAccess 
+>>>>>>> sprint2
     {
-        public void Add(OrderListResult order)
+        public void Add(OrderLineItemsListResult order)
         {
             using (var connection =
                 new SqlConnection(ConfigurationManager.ConnectionStrings["Bangazon"].ConnectionString))
@@ -46,20 +45,8 @@ namespace Bangazon.DataAccess
             }
         }
 
-        public int SetAsPaid(int id)
-        {
-            using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Bangazon"].ConnectionString))
-            {
-                connection.Open();
-                var result = connection.Execute("Update [Order]" +
-                                                "Set PaymentDue = 0" +
-                                                "Where OrderID = @orderID",
-                                               new { orderID = id } );
-                    return result;
-
-            }
-        }
-
      
     }
 }
+
+
