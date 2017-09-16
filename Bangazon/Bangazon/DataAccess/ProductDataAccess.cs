@@ -27,9 +27,21 @@ namespace Bangazon.DataAccess
         {
             using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Bangazon"].ConnectionString))
             {
-                var results = connection.Execute("Insert into Products(ProductName, InStock, Price, Description)" +
-                                                    "Values(@ProductName, @InStock, @Price, @Description)",
-                                                    new { ProductName = product.ProductName, InStock = product.InStock, Price = product.Price, Description = product.Description });
+                var results = connection.Execute("Insert into Products(ProductName, Quantity, Price, Description)" +
+                                                    "Values(@ProductName, @Quantity, @Price, @Description)",
+                                                    new { ProductName = product.ProductName, Quantity = product.Quantity, Price = product.Price, Description = product.Description });
+                return results;
+            }
+        }
+
+        public int SetOutOfStock(int id)
+        {
+            using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Bangazon"].ConnectionString))
+            {
+                connection.Open();
+                var results = connection.Execute("Update Products " + 
+                                       "SET Quantity = 0 " +
+                                       "WHERE ProductID = @productID ", new { productID = id });
                 return results;
             }
         }

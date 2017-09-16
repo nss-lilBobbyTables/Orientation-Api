@@ -49,5 +49,24 @@ namespace Bangazon.Controllers
                 }
             }
         }
+
+        //PUT api/product/outofstock/{id}
+        [HttpPut, Route("outofstock/{id}")]
+        public HttpResponseMessage Put(int id)
+        {
+            using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["Bangazon"].ConnectionString))
+            {
+                try
+                {
+                    var productData = new ProductDataAccess();
+                    var results = productData.SetOutOfStock(id);
+                    return Request.CreateResponse(HttpStatusCode.Accepted, "message: Product marked as out of stock");
+                }
+                catch (Exception ex)
+                {
+                    return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
+                }
+            }
+        }
     }
 }

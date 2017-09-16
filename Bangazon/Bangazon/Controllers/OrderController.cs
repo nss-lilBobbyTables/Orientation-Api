@@ -12,9 +12,11 @@ using System.Web.Http;
 
 namespace Bangazon.Controllers
 {
+    [RoutePrefix("api/order")]
     public class OrderController : ApiController
     {
         //api/Order
+        [HttpPost, Route("")]
         public HttpResponseMessage Post(OrderListResult order)
         {
             using (var connection =
@@ -31,6 +33,28 @@ namespace Bangazon.Controllers
                     return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Add order blew up", ex);
                 };
 
+        }
+
+        //api/order/outstanding
+        [HttpGet, Route("outstanding")]
+        public HttpResponseMessage Get()
+        {
+
+            try
+            {
+                var orderData = new OrderDataAccess();
+                var orders = orderData.Get();
+                if (orders == null)
+                {
+                    return Request.CreateResponse(HttpStatusCode.NotFound, "No outstanding order found");
+                }
+
+                return Request.CreateResponse(HttpStatusCode.OK, orders);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "This is why we can't have nice things", ex);
+            }
         }
     }
 }
