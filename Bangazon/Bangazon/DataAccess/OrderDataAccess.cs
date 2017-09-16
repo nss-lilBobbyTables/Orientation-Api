@@ -12,7 +12,7 @@ namespace Bangazon.DataAccess
 {
     public class OrderDataAccess 
     {
-        public void Add(OrderLineItemsListResult order)
+        public void Add(OrderListResult order)
         {
             using (var connection =
                 new SqlConnection(ConfigurationManager.ConnectionStrings["Bangazon"].ConnectionString))

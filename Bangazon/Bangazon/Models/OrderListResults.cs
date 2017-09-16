@@ -1,6 +1,6 @@
 ﻿namespace Bangazon.Models
 {
-    public class OrderLineItemsListResult
+    public class OrderListResult
     {
         public int Order_ID { get; set; }
         public int Customer_ID { get; set; }
